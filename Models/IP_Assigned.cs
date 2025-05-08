@@ -13,7 +13,7 @@ namespace IP_Manager.Models
         public int subnetID { get; set; }
         public Subnet subnets { get; set; } = null!;
 
-        public int deviceID { get; set; }
+        public int? deviceID { get; set; }
         public Device device { get; set; } = null!;
     }
 }

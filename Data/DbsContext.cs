@@ -12,6 +12,10 @@ namespace IP_Manager.Data
 
         public DbSet<Client> Clients { get; set; }
         public DbSet<Project> Projects { get; set; }
+        public DbSet<Subnet> SubnetS { get; set; }
+        public DbSet<IP_Assigned> IP_Assigned { get; set; }
+        public DbSet<Device> Devices { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

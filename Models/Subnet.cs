@@ -10,7 +10,7 @@ namespace IP_Manager.Models
         public string musk {  get; set; }
         public DateOnly createdAt { get; set; }
 
-        public int projectID { get; set; }
+        public int? projectID { get; set; }
         public Project projects { get; set; }
 
         public ICollection<IP_Assigned> iP_Assignements { get;} = new List<IP_Assigned>();

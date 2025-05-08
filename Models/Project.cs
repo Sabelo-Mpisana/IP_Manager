@@ -13,7 +13,7 @@ namespace IP_Manager.Models
         public DateOnly startDate { get; set; }
         public DateOnly endDate { get; set; }
 
-       public int clientID { get; set; }
+       public int? clientID { get; set; }
         public Client Client { get; set; } = null!;
 
         public ICollection<Subnet> Subnets { get; } = new List<Subnet>();
