@@ -22,6 +22,13 @@ namespace IP_Manager.Controllers
         // GET: Clients
         public async Task<IActionResult> DashBoard()
         {
+
+            return View();
+
+        }
+
+        public async Task<IActionResult> Landing()
+        {
             return View(await _context.Clients.ToListAsync());
         }
 
