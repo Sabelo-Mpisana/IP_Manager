@@ -1,0 +1,124 @@
+﻿@{
+    ViewData["Title"] = "DashBoard";
+}
+
+
+<style>
+   
+
+    .custom-toggler .navbar-toggler-icon {
+         background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='blue' stroke-width='3' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E"); 
+      }
+
+    .card {
+        transition: transform 0.6s ease; /* slower than default */
+    }
+      
+    .card:hover {
+       
+        background-color:aquamarine;
+        transform: scale(1.1,1.1);
+        z-index: 10;
+        position: relative;
+    }
+
+   
+
+    
+</style>
+
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="d-flex justify-content-start mb-3">
+            <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu"
+                    aria-expanded="false" aria-label="Toggle navigation"> 
+               <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+        <!--My side bar-->
+        <div id="NavBar" class="col-md-3 sidebar">
+           @*  <nav class="navbar navbar-expand-lg navbar-light mb-3">
+                <span class="navbar-brand">Welcome!</span>
+            </nav> *@
+            <div id="sidebarMenu" class="collapse">
+                <div class="list-group ">
+                    <a asp-controller="#" asp-action="#" class="list-group-item list-group-item-action">Clients</a>
+                    <a asp-controller="#" asp-action="#" class="list-group-item list-group-item-action">Projects</a>
+                    <a asp-controller="#" asp-action="#" class="list-group-item list-group-item-action">Devices</a>
+                    <a asp-controller="#" asp-action="#" class="list-group-item list-group-item-action">Summary</a>
+                
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-9 content">
+            <div class="row">
+            
+                <div class="col-md-6">
+                    <div class="content-box">
+                        <a asp-controller="" asp-action="" class="card-link">
+                            <div class="card">
+                                <div class="card-body text-center">
+                                
+                                    <i class="bi bi-people mb-2 text-primary" style="font-size: 3rem;"></i><br />
+
+                                    <a asp-controller="#" asp-action="#" class="btn stretched-link">Clients</a>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+           
+                <div class="col-md-6">
+                    <div class="content-box">
+                        <a asp-controller="" asp-action="" class="card-link">
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    
+                                    <i class="bi bi-folder  mb-2 text-primary" style="font-size: 3rem;"></i><br />
+
+                                    <a asp-controller="#" asp-action="#" class="btn stretched-link">Projects</a>
+
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="content-box">
+                        <a asp-controller="" asp-action="" class="card-link">
+                            <div class="card">
+                                <div class="card-body text-center">
+                               
+                                    <i class="bi bi-cpu mb-2 text-primary" style="font-size: 3rem;"></i><br />
+                                    <a asp-controller="#" asp-action="#" class="btn stretched-link">Devices</a>
+
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+
+                <div class="col-md-6">
+                    <div class="content-box">
+                        <a asp-controller="" asp-action="" class="card-link">
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    
+                                    <i class="bi bi-bar-chart-line mb-2 text-primary" style="font-size: 3rem;" ></i><br />
+                                    <a asp-controller="#" asp-action="#" class="btn stretched-link">Summary</a>
+
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
