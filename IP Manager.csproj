@@ -34,7 +34,6 @@
 
   <ItemGroup>
     <None Include="wwwroot\css\P2 Enhanced2 art.png" />
-    <None Include="wwwroot\Pictures\P2 Enhanced2 art.png" />
   </ItemGroup>
 
 </Project>
