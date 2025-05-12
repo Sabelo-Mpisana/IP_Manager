@@ -1,0 +1,34 @@
+﻿@model IP_Manager.Models.Client
+
+@{
+    ViewData["Title"] = "Create Client";
+}
+
+<form asp-action="CreateClient" asp-controller="Clients" method="post">
+
+    @Html.AntiForgeryToken();
+
+    <div class="mb-3 mt-3">
+        <label for="firstName" class="form-label">FirstName: </label>
+        <input type="text" class="form-control" id="firstName" placeholder="FirstName" name="firstName" asp-for="firstName"/>
+    </div>
+    <div class="mb-3">
+        <label for="lastName" class="form-label">LastName: </label> 
+        <input type="text" class="form-control" id="lastName" placeholder="Surname" name="lastName" asp-for="lastName"/>
+    </div>
+    <div class="mb-3">
+        <label for="email" class="form-label">Email: </label>
+        <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" asp-for="email" />
+    </div>
+    <div class="mb-3">
+        <label for="contactNo" class="form-label">ContactNo: </label>
+        <input type="tel" class="form-control" id="contactNo" placeholder="Enter Contact Number" name="contactNo" asp-for="contactNO" />
+    </div>
+    <div class="mb-3">
+        <label for="physicalAddress" class="form-label">Physical Address: </label>
+        <input type="text" class="form-control" id="physicalAddress" placeholder="Enter Physical Address" name="physicalAddress" asp-for="physicalAddress" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Create</button>
+
+</form>

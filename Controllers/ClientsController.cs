@@ -32,6 +32,39 @@ namespace IP_Manager.Controllers
             return View(await _context.Clients.ToListAsync());
         }
 
+        public async Task<IActionResult> CreateClient()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateClient(Client client)
+        {
+            try 
+            {
+                if (ModelState.IsValid)
+                {
+
+                    _context.Add(client);
+                    await _context.SaveChangesAsync();
+
+                    return RedirectToAction("Landing","Clients");
+                }
+                else
+                {
+                    TempData["ErrorMessage"] = "Invalid data Provided";
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = "Error occured saving client Data";
+            }
+           
+            return View(client);
+            
+        }
+             
 
 
         

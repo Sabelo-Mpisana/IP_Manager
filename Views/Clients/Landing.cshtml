@@ -1,4 +1,6 @@
-﻿@{
+﻿@model IEnumerable<IP_Manager.Models.Client>
+
+@{
     ViewData["Title"] = "Client Landing";
 }
 
@@ -7,21 +9,40 @@
         <div class="col-md-9 content">
             <table class="table table-hover">
                 <thead>
-                    <th>Full Name</th>
+                    <th>FirstName</th>
+                <th>LastName</th>
                     <th>Email</th>
                     <th>Contact</th>
                     <th>Address</th>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td> </td>
-                    </tr>
+                    @if(Model != null && Model.Any())
+                    {
+                        foreach(var item in Model)
+                        {
+                            <tr>
+                                <td>@item.firstName </td>
+                                <td>@item.lastName</td>
+                                <td>@item.email</td>
+                                <td>@item.contactNO</td>
+                                <td>@item.physicalAddress</td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="8">No Data Available</td>
+                        </tr>
+                    }
+
                 </tbody>
             </table>
         </div>
-
         <div id="NavBar" class="col-md-3 sidebar">
-            <button >ADD CLIENT</button>
+            <a asp-controller="Clients" asp-action="CreateClient" class="btn btn-dark">Create Client
+
+            </a>
         </div>
     </div>
 </div>
