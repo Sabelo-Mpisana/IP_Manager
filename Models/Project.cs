@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
+using System.ComponentModel.DataAnnotations;
 
 namespace IP_Manager.Models
 {
@@ -14,7 +15,9 @@ namespace IP_Manager.Models
         public DateOnly endDate { get; set; }
 
        public int? clientID { get; set; }
-        public Client Client { get; set; } = null!;
+
+        [BindNever]
+        public Client? Client { get; set; } = null!;
 
         public ICollection<Subnet> Subnets { get; } = new List<Subnet>();
              

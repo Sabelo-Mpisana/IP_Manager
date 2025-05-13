@@ -29,7 +29,6 @@
     <Folder Include="Views\Devices\" />
     <Folder Include="Views\IP_Assignes\" />
     <Folder Include="Views\Subnets\" />
-    <Folder Include="Views\Projects\" />
   </ItemGroup>
 
   <ItemGroup>

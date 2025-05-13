@@ -1,0 +1,40 @@
+﻿@model IP_Manager.Models.Project
+
+@{
+    ViewData["Tittle"] = "Create Project";
+}
+
+<form asp-action="createProject" asp-controller="Projects" method="post">
+
+    @Html.AntiForgeryToken()
+
+    <div class="mb-3">
+        <label class="form-label" for="projectName">Project Name:</label>
+        <input type="text" class="form-control" id="projectName" placeholder="Enter Project Name" name="projectName" asp-for="projectName" />
+    </div>
+    <div class="mb-3">
+        <label class="form-label" for="projectDescription">Project Description:</label>
+        <input type="text" class="form-control" id="projectDescription" placeholder="Enter Project Description" name="projectDescription" asp-for="projectDescription" />
+    </div>
+   
+    <div class="mb-3">
+        <label class="form-label" for="status">Status:</label>
+        <input type="text" class="form-control" id="status" placeholder="Enter Project status" name="status" asp-for="status" />
+    </div>
+    <div class="mb-3">
+        <label class="form-label" for="location">Project Location:</label>
+        <input type="text" class="form-control" id="location" placeholder="Enter Project Location" name="location" asp-for="location" />
+    </div>
+    <div class="mb-3">
+        <label class="form-label" for="startDate">Start Date:</label>
+        <input type="date" class="form-control" id="startDate" placeholder="Enter Start Date" name="startDate" asp-for="startDate" />
+    </div>
+    <div class="mb-3">
+        <label class="form-label" for="endDate">Finish Date:</label>
+        <input type="date" class="form-control" id="endDate" placeholder="Enter Finish Date" name="endDate" asp-for="endDate" />
+    </div>
+    
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+
+</form>

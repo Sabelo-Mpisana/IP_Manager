@@ -6,7 +6,8 @@
 
 <form asp-action="CreateClient" asp-controller="Clients" method="post">
 
-    @Html.AntiForgeryToken();
+    @Html.AntiForgeryToken()
+
 
     <div class="mb-3 mt-3">
         <label for="firstName" class="form-label">FirstName: </label>
@@ -29,6 +30,7 @@
         <input type="text" class="form-control" id="physicalAddress" placeholder="Enter Physical Address" name="physicalAddress" asp-for="physicalAddress" />
     </div>
 
-    <button type="submit" class="btn btn-primary">Create</button>
+    <button type="submit" class="btn btn-primary">Next</button>
+   
 
 </form>

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using IP_Manager.Data;
 using IP_Manager.Models;
+using Newtonsoft.Json;
 
 namespace IP_Manager.Controllers
 {
@@ -46,10 +47,9 @@ namespace IP_Manager.Controllers
                 if (ModelState.IsValid)
                 {
 
-                    _context.Add(client);
-                    await _context.SaveChangesAsync();
+                    TempData["clientData"] = JsonConvert.SerializeObject(client);
 
-                    return RedirectToAction("Landing","Clients");
+                    return RedirectToAction("createProject","Projects");
                 }
                 else
                 {
