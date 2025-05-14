@@ -40,6 +40,12 @@ namespace IP_Manager.Data
                 .HasOne(d => d.IP_assined)
                 .WithOne(a => a.device)
                 .HasForeignKey<IP_Assigned>(a => a.deviceID);
+
+            //TO enforce uniqueness per...
+            modelBuilder.Entity<IP_Assigned>()
+            .HasIndex(ip => new { ip.subnetID, ip.IpAddress })
+            .IsUnique();
+
         }
 
 

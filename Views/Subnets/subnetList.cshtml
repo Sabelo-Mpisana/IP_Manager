@@ -13,7 +13,7 @@
                         <th>Networks</th>
                         <th>Subnet Mask</th>
                         <th>Date Created</th>
-                        
+
                     </tr>
                 </thead>
                 <tbody>
@@ -23,11 +23,11 @@
                         {
                             <tr>
                                 <td>@item.IPV4 </td>
-                                <td>@item.musk</td>
+                                <td>@item.mask</td>
                                 <td>@item.createdAt</td>
-                               
+
                             </tr>
-                           
+
                         }
                     }
                     else
@@ -40,6 +40,42 @@
                 </tbody>
             </table>
         </div>
+        <div id="NavBar" class="col-md-3 sidebar">
+            <form asp-action="#" asp-controller="#" method="post">
+                <div class="mb-3 mt-3">
+                    <label for="IPV4" class="form-label">IPV4: </label>
+                    <input type="text" class="form-control" id="IPV4" maxlength="15" placeholder="e.g. 192.168.0.1" name="IPV4" />
+                </div>
 
+                <div class="mb-3>
+                    <label for="mask" class="form-label">Mask: </label>
+                    <input type="text" class="form-control" id="mask" maxlength="15" placeholder="e.g. 255.255.255.0" name="mask" />
+                </div>
+
+
+                <button type="submit" class="btn btn-primary mt-3">Next</button>
+
+            </form>
+        </div>
     </div>
 </div>
+
+@section Scripts {
+    <script>
+        function formatIpInput(input) {
+            input.addEventListener('input', function () {
+                let value = input.value.replace(/[^\d]/g, ''); //only digits
+                let newVal = '';
+                for (let i = 0; i < value.length && i < 12; i += 3) {
+                    if (newVal.length > 0) newVal += '.';
+                    newVal += value.substr(i, 3);
+                }
+                input.value = newVal;
+            });
+        }
+        document.addEventListener('DOMContentLoaded', function () {
+            formatIpInput(document.getElementById('IPV4'));
+            formatIpInput(document.getElementById('mask'));
+        });
+    </script>
+}

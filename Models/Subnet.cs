@@ -6,9 +6,9 @@ namespace IP_Manager.Models
     {
         [Key]
         public int subnetID { get; set; }
-        public string IPV4 { get; set; }
-        public string musk {  get; set; }
-        public DateOnly createdAt { get; set; }
+        public int IPV4 { get; set; }
+        public int mask {  get; set; }
+        public DateOnly createdAt { get; set; } = DateOnly.FromDateTime(DateTime.Now);
 
         public int? projectID { get; set; }
         public Project projects { get; set; }
