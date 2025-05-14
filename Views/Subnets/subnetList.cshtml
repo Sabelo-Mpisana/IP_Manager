@@ -1,0 +1,45 @@
+﻿@model IEnumerable<IP_Manager.Models.Subnet>
+
+@{
+    ViewData["Tittle"] = "Subnets";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-9 content">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Networks</th>
+                        <th>Subnet Mask</th>
+                        <th>Date Created</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Any())
+                    {
+                        foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.IPV4 </td>
+                                <td>@item.musk</td>
+                                <td>@item.createdAt</td>
+                               
+                            </tr>
+                           
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="8">No Data Available</td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,56 @@
+﻿@model IEnumerable<IP_Manager.Models.Project>
+@using System.Collections.Generic
+
+@{
+    ViewData["Title"] = "Projects";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-9 content">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Project Name</th>
+                        <th>Status</th>
+                        <th>Location</th>
+                        <th>Start Date</th>
+                        <th>Finish Date</th>
+                    </tr>
+                
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Any())
+                    {
+                        foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.projectName </td>
+                                <td>@item.status</td>
+                                <td>@item.location</td>
+                                <td>@item.startDate.ToString("yyyy-MM-dd")</td>
+                                <td>@item.endDate.ToString("yyyy-MM-dd")</td>
+                                <td>
+                                    <a asp-controller="Subnets" asp-action="subnetList" class="btn btn-dark">
+                                        Networks
+
+                                    </a>
+                                </td>
+                            </tr>
+                           
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="8">No Data Available</td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+       
+    </div>
+</div>
+

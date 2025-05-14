@@ -19,7 +19,7 @@ namespace IP_Manager.Models
         [BindNever]
         public Client? Client { get; set; } = null!;
 
-        public ICollection<Subnet> Subnets { get; } = new List<Subnet>();
+        public ICollection<Subnet>? Subnets { get; } = new List<Subnet>();
              
     }
 }

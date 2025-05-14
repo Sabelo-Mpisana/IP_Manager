@@ -1,6 +1,7 @@
 ﻿using IP_Manager.Data;
 using IP_Manager.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 
 namespace IP_Manager.Controllers
@@ -28,6 +29,7 @@ namespace IP_Manager.Controllers
             return View();
         }
 
+        //Creating a project 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> createProject(Project project)
@@ -59,6 +61,12 @@ namespace IP_Manager.Controllers
             }
 
             return View(project);
+        }
+
+        //Viewing projects 
+        public async Task<IActionResult> projectList()
+        {
+            return View( await _dbsContext.Projects.ToListAsync());
         }
 
     }

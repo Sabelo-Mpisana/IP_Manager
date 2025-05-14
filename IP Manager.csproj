@@ -28,7 +28,6 @@
   <ItemGroup>
     <Folder Include="Views\Devices\" />
     <Folder Include="Views\IP_Assignes\" />
-    <Folder Include="Views\Subnets\" />
   </ItemGroup>
 
   <ItemGroup>
