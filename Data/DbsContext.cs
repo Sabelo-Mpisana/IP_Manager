@@ -46,6 +46,22 @@ namespace IP_Manager.Data
             .HasIndex(ip => new { ip.subnetID, ip.IpAddress })
             .IsUnique();
 
+            modelBuilder.Entity<Subnet>()
+                .Property(s => s.IPV4)
+                .HasColumnType("BINARY(4)")
+                .IsRequired();
+
+            modelBuilder.Entity<Subnet>()
+                .Property(s => s.Mask)
+                .HasColumnType("binary(4)")
+                .IsRequired();
+
+            modelBuilder.Entity<Subnet>()
+                .HasIndex(s => s.IPV4)
+                .IsUnique();
+
+
+
         }
 
 

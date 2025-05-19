@@ -45,7 +45,7 @@ namespace IP_Manager.Controllers
                     }
                 }
 
-                var clientJson = TempData["clientData"]?.ToString();
+                var clientJson = TempData["projectData"]?.ToString();
                 var client = JsonConvert.DeserializeObject<Client>(clientJson);
 
                 _dbsContext.Clients.Add(client);
@@ -55,6 +55,8 @@ namespace IP_Manager.Controllers
                 project.clientID = client.clientID;
                 _dbsContext.Projects.Add(project);
                 await _dbsContext.SaveChangesAsync();
+
+                TempData["projectData"] = JsonConvert.SerializeObject(project);
 
                 return RedirectToAction("Landing", "Clients");
 

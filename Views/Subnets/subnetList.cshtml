@@ -1,4 +1,4 @@
-﻿@model IEnumerable<IP_Manager.Models.Subnet>
+﻿@model IP_Manager.ViewModels.subnetListViewModel
 
 @{
     ViewData["Tittle"] = "Subnets";
@@ -17,13 +17,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @if (Model != null && Model.Any())
+                    @if (Model != null && Model.subnetList.Any())
                     {
-                        foreach (var item in Model)
+                        foreach (var item in Model.subnetList)
                         {
                             <tr>
                                 <td>@item.IPV4 </td>
-                                <td>@item.mask</td>
+                                <td>@item.Mask</td>
                                 <td>@item.createdAt</td>
 
                             </tr>
@@ -41,19 +41,21 @@
             </table>
         </div>
         <div id="NavBar" class="col-md-3 sidebar">
-            <form asp-action="#" asp-controller="#" method="post">
+            <form asp-action="subnetList" asp-controller="Subnets" method="post">
+                @Html.AntiForgeryToken()
+
                 <div class="mb-3 mt-3">
-                    <label for="IPV4" class="form-label">IPV4: </label>
-                    <input type="text" class="form-control" id="IPV4" maxlength="15" placeholder="e.g. 192.168.0.1" name="IPV4" />
+                    <label for="IPV4String" class="form-label">IPV4: </label>
+                    <input type="text" asp-for="newSubnet.IPV4String" class="form-control" id="IPV4" maxlength="15" placeholder="e.g. 192.168.0.1" name="IPV4String" />
                 </div>
 
                 <div class="mb-3>
-                    <label for="mask" class="form-label">Mask: </label>
-                    <input type="text" class="form-control" id="mask" maxlength="15" placeholder="e.g. 255.255.255.0" name="mask" />
+                    <label for="maskString" class="form-label">Mask: </label>
+                    <input type="text" asp-for="newSubnet.maskString" class="form-control" id="mask" maxlength="15" placeholder="e.g. 255.255.255.0" name="maskString" />
                 </div>
 
 
-                <button type="submit" class="btn btn-primary mt-3">Next</button>
+                <button type="submit" class="btn btn-primary mt-3">Save</button>
 
             </form>
         </div>

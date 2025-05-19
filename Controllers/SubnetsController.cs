@@ -1,7 +1,12 @@
 ﻿using IP_Manager.Data;
+using IP_Manager.Migrations;
 using IP_Manager.Models;
+using IP_Manager.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query.Internal;
+using Newtonsoft.Json;
+using System.Net;
 
 namespace IP_Manager.Controllers
 {
@@ -16,42 +21,44 @@ namespace IP_Manager.Controllers
 
         public async Task<IActionResult> subnetList()
         {
-            return View( await _dbsContext.Subnet.ToListAsync());
+            var viewModel = new subnetListViewModel
+            {
+                subnetList = await _dbsContext.Subnet.ToListAsync(),
+                newSubnet = new Subnet()
+
+            };
+            return View(viewModel);
         }
 
 
-        //[HttpPost]
-        //public IActionResult Create(string IPV4String, string MaskString)
-        //{
-        //    try
-        //    {
-        //        var subnet = new Subnet
-        //        {
-        //            IPV4 = ConvertIPv4ToInt(IPV4String),
-        //            mask = MaskString, // you can also convert this to int
-        //            createdAt = DateOnly.FromDateTime(DateTime.Now)
-        //        };
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> subnetList(subnetListViewModel viewModel)
+        {
+            if(!ModelState.IsValid)
+            {
+                var projectJson = TempData["projectData"]?.ToString();
+                var project = JsonConvert.DeserializeObject<Project>(projectJson);
 
-        //        _context.Subnets.Add(subnet);
-        //        _context.SaveChanges();
+                viewModel.newSubnet.IPV4 = IPAddress.Parse(viewModel.newSubnet.IPV4String).GetAddressBytes();
+                viewModel.newSubnet.Mask = IPAddress.Parse(viewModel.newSubnet.maskString).GetAddressBytes();
 
-        //        return RedirectToAction("Index");
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        // Handle invalid input here
-        //        ModelState.AddModelError("", "Invalid IP address");
-        //        return View();
-        //    }
-        //}
 
-        //private int ConvertIPv4ToInt(string ip)
-        //{
-        //    var bytes = System.Net.IPAddress.Parse(ip).GetAddressBytes();
-        //    if (BitConverter.IsLittleEndian)
-        //        Array.Reverse(bytes);
-        //    return BitConverter.ToInt32(bytes, 0);
-        //}
+                viewModel.newSubnet.projectID = project.projectID;
+                _dbsContext.Subnet.Add(viewModel.newSubnet);
+                await _dbsContext.SaveChangesAsync();
+
+                return RedirectToAction("subnetList","Subnets");
+
+            }
+            else
+            {
+
+            }
+
+            return View(viewModel);
+
+        }
 
     }
 }
