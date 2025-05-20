@@ -19,12 +19,14 @@ namespace IP_Manager.Controllers
             _dbsContext = dbsContext;
         }
 
-        public async Task<IActionResult> subnetList()
+        public async Task<IActionResult> subnetList(int projectId)
         {
             var viewModel = new subnetListViewModel
             {
-                subnetList = await _dbsContext.Subnet.ToListAsync(),
-                newSubnet = new Subnet()
+                subnetList = await _dbsContext.Subnet.Where(s => s.projectID == projectId)
+                .ToListAsync(),
+
+                newSubnet = new Subnet {projectID = projectId}
 
             };
             return View(viewModel);
@@ -37,18 +39,41 @@ namespace IP_Manager.Controllers
         {
             if(!ModelState.IsValid)
             {
-                var projectJson = TempData["projectData"]?.ToString();
-                var project = JsonConvert.DeserializeObject<Project>(projectJson);
+                //foreach (var value in ModelState.Values)
+                //{
+                //    foreach (var error in value.Errors)
+                //    {
+                //        Console.WriteLine(error.ErrorMessage); // or log it
+                //    }
+                //}
 
-                viewModel.newSubnet.IPV4 = IPAddress.Parse(viewModel.newSubnet.IPV4String).GetAddressBytes();
-                viewModel.newSubnet.Mask = IPAddress.Parse(viewModel.newSubnet.maskString).GetAddressBytes();
+                //var projectJson = TempData["projectData"]?.ToString();
+                //var project = JsonConvert.DeserializeObject<Project>(projectJson);
+
+                //viewModel.newSubnet.IPV4 = IPAddress.Parse(viewModel.newSubnet.IPV4String).GetAddressBytes();
+                //viewModel.newSubnet.Mask = IPAddress.Parse(viewModel.newSubnet.maskString).GetAddressBytes();
 
 
-                viewModel.newSubnet.projectID = project.projectID;
-                _dbsContext.Subnet.Add(viewModel.newSubnet);
-                await _dbsContext.SaveChangesAsync();
+                //viewModel.newSubnet.projectID = project.projectID;
+                //_dbsContext.Subnet.Add(viewModel.newSubnet);
+                //await _dbsContext.SaveChangesAsync();
 
-                return RedirectToAction("subnetList","Subnets");
+                //return RedirectToAction("subnetList","Subnets");
+                try
+                {
+                    viewModel.newSubnet.IPV4 = IPAddress.Parse(viewModel.newSubnet.IPV4String).GetAddressBytes();
+                    viewModel.newSubnet.Mask = IPAddress.Parse(viewModel.newSubnet.maskString).GetAddressBytes();
+
+                    _dbsContext.Subnet.Add(viewModel.newSubnet);
+                    await _dbsContext.SaveChangesAsync();
+
+                    return RedirectToAction("subnetList", new { projectId = viewModel.newSubnet.projectID });
+                }
+                catch
+                {
+                    ModelState.AddModelError("", "Invalid IP address or mask format.");
+                }
+
 
             }
             else

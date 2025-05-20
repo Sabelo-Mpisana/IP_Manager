@@ -17,12 +17,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @if (Model != null && Model.subnetList.Any())
+                    @if (Model?.subnetList != null && Model.subnetList.Any())
                     {
                         foreach (var item in Model.subnetList)
                         {
                             <tr>
-                                <td>@item.IPV4 </td>
+                                <td>
+                                  
+                                    @System.Net.IPAddress.Parse(Convert.ToBase64String(item.IPV4))
+
+                                </td>
                                 <td>@item.Mask</td>
                                 <td>@item.createdAt</td>
 
@@ -43,6 +47,8 @@
         <div id="NavBar" class="col-md-3 sidebar">
             <form asp-action="subnetList" asp-controller="Subnets" method="post">
                 @Html.AntiForgeryToken()
+
+                <input type="hidden" asp-for="newSubnet.projectID"/>
 
                 <div class="mb-3 mt-3">
                     <label for="IPV4String" class="form-label">IPV4: </label>

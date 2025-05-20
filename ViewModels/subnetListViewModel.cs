@@ -6,5 +6,6 @@ namespace IP_Manager.ViewModels
     {
         public IEnumerable<Subnet> subnetList {  get; set; }
         public Subnet newSubnet { get; set; }
+        public int ProjectID { get; set; }
     }
 }
