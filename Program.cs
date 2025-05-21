@@ -9,6 +9,9 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<DbsContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("connectST")));
 
+builder.Services.AddSession();
+builder.Services.AddControllersWithViews();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -21,10 +24,12 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+app.UseSession();
 
 app.UseRouting();
 
 app.UseAuthorization();
+app.MapDefaultControllerRoute();
 
 app.MapControllerRoute(
     name: "default",

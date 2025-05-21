@@ -1,6 +1,8 @@
 ﻿using IP_Manager.Data;
 using IP_Manager.Models;
+using IP_Manager.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 
@@ -32,7 +34,7 @@ namespace IP_Manager.Controllers
         //Creating a project 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> createProject(Project project)
+        public async Task<IActionResult> createProject(Models.Project project)
         {
             if(ModelState.IsValid)
             {
@@ -66,10 +68,24 @@ namespace IP_Manager.Controllers
         }
 
         //Viewing projects 
-        public async Task<IActionResult> projectList()
+        public async Task<IActionResult> projectList(int id)
         {
-            return View( await _dbsContext.Projects.ToListAsync());
+            var ViewModel = await (from Project in _dbsContext.Projects
+                                      // where (Patient.Status == "A")
+                                      
+
+                                       select new subnetListViewModel
+                                       {
+                                           ProjectID = id,
+
+                                       }).ToListAsync();
+
+            // return View( await _dbsContext.Projects.ToListAsync());
+            return RedirectToAction("subnetList", "Subnets");
         }
+
+        
+
 
     }
 }

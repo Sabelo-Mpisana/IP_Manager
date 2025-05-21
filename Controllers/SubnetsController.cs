@@ -23,8 +23,7 @@ namespace IP_Manager.Controllers
         {
             var viewModel = new subnetListViewModel
             {
-                subnetList = await _dbsContext.Subnet.Where(s => s.projectID == projectId)
-                .ToListAsync(),
+               
 
                 newSubnet = new Subnet {projectID = projectId}
 
@@ -59,8 +58,13 @@ namespace IP_Manager.Controllers
                 //await _dbsContext.SaveChangesAsync();
 
                 //return RedirectToAction("subnetList","Subnets");
+
+                var projectId = HttpContext.Session.GetInt32("ProjectID");
+
                 try
                 {
+                    //viewModel.newSubnet.projectID = projectId.Value;
+                    viewModel.newSubnet.projectID = null;
                     viewModel.newSubnet.IPV4 = IPAddress.Parse(viewModel.newSubnet.IPV4String).GetAddressBytes();
                     viewModel.newSubnet.Mask = IPAddress.Parse(viewModel.newSubnet.maskString).GetAddressBytes();
 

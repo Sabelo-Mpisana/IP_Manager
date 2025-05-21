@@ -44,6 +44,9 @@
                 </tbody>
             </table>
         </div>
+
+        <p>Project ID: @Model?.ProjectID</p>
+
         <div id="NavBar" class="col-md-3 sidebar">
             <form asp-action="subnetList" asp-controller="Subnets" method="post">
                 @Html.AntiForgeryToken()
@@ -52,12 +55,12 @@
 
                 <div class="mb-3 mt-3">
                     <label for="IPV4String" class="form-label">IPV4: </label>
-                    <input type="text" asp-for="newSubnet.IPV4String" class="form-control" id="IPV4" maxlength="15" placeholder="e.g. 192.168.0.1" name="IPV4String" />
+                    <input type="text" asp-for="newSubnet.IPV4String" class="form-control" id="IPV4" maxlength="15" placeholder="e.g. 192.168.0.1" name="newSubnet.IPV4String" />
                 </div>
 
                 <div class="mb-3>
                     <label for="maskString" class="form-label">Mask: </label>
-                    <input type="text" asp-for="newSubnet.maskString" class="form-control" id="mask" maxlength="15" placeholder="e.g. 255.255.255.0" name="maskString" />
+                    <input type="text" asp-for="newSubnet.maskString" class="form-control" id="mask" maxlength="15" placeholder="e.g. 255.255.255.0"  />
                 </div>
 
 
@@ -67,6 +70,8 @@
         </div>
     </div>
 </div>
+
+%
 
 @section Scripts {
     <script>
